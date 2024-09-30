@@ -1,0 +1,43 @@
+<%- include("partials/header.ejs") %>
+
+        <div id="displaybox" class="text-center">
+            <div id="introtext">
+                <p style="margin-top: 5px; font-size: 12px;">Powered by <a href="https://www.openuv.io/dashboard" target="_blank">Open UV</a></p>
+                <h1>Sunscreen Advisor</h1>
+                    <p>Planning to go outside?</p>
+                    <p>Wait!</p>
+                    <p>As the US Environmental Protection Agency says, when the <a href="https://www.epa.gov/sunsafety/uv-index-scale-0" target="_blank">UV index</a> value is 3 or higher, protection like sunscreen is needed.</p>
+                    <p>Input your Latitude and Longitude from <a href="https://www.google.com/maps" target="_blank">Google Maps</a> (Right Click your Location)</p>
+                    <p>and press the button below and see UV value</p>
+                    <form action="/" id="form" class="form" method="POST">
+                        <label for="lat">Enter your Latitude</label>
+                        <input type="text" id="lat" name="lat" placeholder="123.45" class="form-control">
+
+                        <label for="lng">Enter your Longitude</label>
+                        <input type="text" id="lng" name="lng" placeholder="123.45" class="form-control">
+                        
+                        <button type="submit" class="btn btn-success">Today's Index</button>
+                    </form>
+                    <% if (valueRound == null) { %>
+                        <p>Please input your Latitude and Longitude</p>
+                    <% } else { %>
+                        <% if (valueRound == 0) { %>
+                            <p>Index Value: <%= value %> 🌙</p>
+                            <p>No UV light detected, no protection needed.</p>
+                        <% } else if (valueRound >= 1 && valueRound <= 2) { %>
+                            <p>Index Value: <%= value %> ☁️</p>
+                            <p>Low UV light detected, no protection needed.</p>
+                        <% } else if (valueRound >= 3 && valueRound <= 7) { %>
+                            <p>Index Value: <%= value %> ☀️</p>
+                            <p>Moderate UV light detected, protection needed.</p>
+                            <p>Sunscreen and protective clothing suggested.</p>
+                        <% } else { %>
+                            <p>Index Value: <%= value %> 🔥</p>
+                            <p>High UV light detected, extra protection needed.</p>
+                            <p>Sunscreen and protective clothing suggested, along with breaks under shade.</p>
+                        <% } %>
+                    <% } %>
+            </div>
+        </div>
+    </body>
+</html>
